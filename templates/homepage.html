@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Vocab-Bird</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='alphabet.ico') }}">
+</head>
+
+
+<header>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">
+         <img style="max-width:150px; margin-top: -5px;" src="{{ url_for('static', filename='images/logo.png') }}">
+         </a>
+      </div>
+      <div class="container-fluid">
+
+        <ul class="nav navbar-nav navbar-right">
+          <div style="margin-right: 10px; margin-left: 15px; margin-top: 5px; margin-bottom: 5px;" class="container-fluid">
+            <h5>
+               <a href="/support-donate/"> <span class="glyphicon glyphicon-heart"></span> Contribute &nbsp;  </a>
+               <a href="/login/"><span class="glyphicon glyphicon-log-in"></span> Login  &nbsp; </a>
+               <a href="/register/"><span class="glyphicon glyphicon-pencil"></span> Sign up</a>
+               <h5>
+
+            </div>
+         </ul>
+         </ul>
+      </div>
+    </div>
+</nav>
+   </header>
+   <body class="body" style="background:#29313a">
+      <div class="border-row" style="width: 100%; margin-bottom: 15px"></div>
+      <div class="container-fluid" style="min-height: 100%;">
+         {% block body %}
+         		{% with messages = get_flashed_messages() %}
+				  {% if messages %}
+				    {% for message in messages %}
+					  <div class="alert alert-warning alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+						{{message}}
+					  </div>
+					{% endfor %}
+				  {% endif %}
+				{% endwith %}
+         {% endblock %}
+
+      </div>
+
+      <!-- Footer -->
+        <div class="footer">
+          <div id="button"></div>
+          <div id="container">
+            <div id="cont">
+              <div class="footer_center">
+        	       <h3>Built with <span style="color: transparent;text-shadow: 0 0 0 red;">❤️</span> by <a href="https://github.com/ab-anand" target="_blank"><i>Abhinav Anand</i></a></h3>
+              </div>
+            </div>
+          </div>
+          <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+        </div>
+      <!-- footer ends -->
+
+   </body>
+
+
+</html>

@@ -1,0 +1,33 @@
+{% extends "homepage.html" %} {% block body %}
+<form action="{{ url_for('welcome')}}" id="content">
+  <div class="form-group" style="margin-top:40px">
+    <label for="search" style="color:white; font-size:40px">What are your looking for?</label>
+    <input type="text" class="form-control" placeholder="Search" name="query">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+<div role="tabpanel" style="margin-top:20px">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#meaning" aria-controls="basics" role="tab" data-toggle="tab">Meaning</a></li>
+    <li role="presentation"><a href="#synonym" aria-controls="wdev" role="tab" data-toggle="tab">Synonym</a></li>
+    <li role="presentation"><a href="#antonym" aria-controls="dan" role="tab" data-toggle="tab">Antonym</a></li>
+    <li role="presentation"><a href="#usage" aria-controls="dan" role="tab" data-toggle="tab">Usage Example</a></li>
+
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content" style="color:white; font-size:20px">
+    <div role="tabpanel" class="tab-pane fade in active" id="meaning" >
+      {{ word }}
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="synonym">web dev</div>
+    <div role="tabpanel" class="tab-pane fade" id="antonym">Data analysis!#Q$@!#</div>
+    <div role="tabpanel" class="tab-pane fade" id="usage">Data analysis!#Q$@!#</div>
+
+  </div>
+
+</div>
+{% endblock %}
