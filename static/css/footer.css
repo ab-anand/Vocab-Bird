@@ -1,6 +1,6 @@
 
 .footer{
-  font-family: 'Indie Flower', cursive;
+  font-family: 'Indie Flower', cursive !important;
   font-weight:300;
   background-color:#29313a;
   color:#FFF;
@@ -78,7 +78,7 @@ height:100%;
   text-align:center;
 }
 .footer h3{
-	font-family: 'Helvetica';
+	font-family: 'Caveat', cursive;
 	font-size: 30px;
 	font-weight: 100;
 	margin-top:70px;

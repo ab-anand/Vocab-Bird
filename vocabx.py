@@ -1,18 +1,26 @@
 from vocabulary.vocabulary import Vocabulary as vb
 import json
+from HTMLParser import HTMLParser  # python 2.x
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
+
+unescape = HTMLParser().unescape
 
 def details(word):
     meaning = vb.meaning(word)
     antonym = vb.antonym(word)
     synonym = vb.synonym(word)
     usage = vb.usage_example(word)
-    
+
     if meaning == False:
         meaning = 'Not Found'
     else:
         meaning = json.loads(meaning)
-        meaning = str(meaning[0]['text'])
+        # meaning = str(meaning[0]['text'])
+        meaning = [unescape(meaning[i]['text']) for i in range(len(meaning))]
+
     if antonym == False:
         antonym = 'Not Found'
     else:
@@ -40,5 +48,5 @@ def details(word):
     return values
 
 
-value = details('ride')
-print value
+# value = details('ride')
+# print type(value)

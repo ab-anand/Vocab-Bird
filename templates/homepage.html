@@ -2,18 +2,22 @@
 <html>
 
 <head>
+  {% block head %}
   <title>Vocab-Bird</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed|Caveat" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="shortcut icon" href="{{ url_for('static', filename='alphabet.ico') }}">
+  {% endblock %}
 </head>
 
 
@@ -43,6 +47,7 @@
 </nav>
    </header>
    <body class="body" style="background:#29313a">
+
       <div class="border-row" style="width: 100%; margin-bottom: 15px"></div>
       <div class="container-fluid" style="min-height: 100%;">
          {% block body %}
@@ -73,8 +78,15 @@
           <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
         </div>
       <!-- footer ends -->
-
-   </body>
-
+         
+</body>
+<script>
+$(document).ready(function(){
+    $('body').append('<div id="loader"></div>');
+});
+$(window).load(function(){
+     $('.loader').fadeOut();
+});
+</script>
 
 </html>
