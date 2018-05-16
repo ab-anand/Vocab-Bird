@@ -1,0 +1,47 @@
+{% extends "homepage.html" %}
+{% from "_formhelpers.html" import render_field %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block body %}
+
+<body>
+
+  <div class="container">
+    <h4 style="color:white;font-family: 'Caveat', cursive;font-size:40px">Register here:</h4>
+    <br>
+    <!--
+   <form action="" method="post">
+   <input type="text" placeholder="Username" name="username" value="{{
+     request.form.username }}"> <br><br>
+
+    <input type="password" placeholder="Password" name="password" value="{{
+     request.form.password }}"> <br><br>
+
+    <input type="Re-type your password" placeholder="Password Again" name="password2" value="{{
+     request.form.password2 }}"> <br><br>
+
+    <input type="email" placeholder="Email" name="email" value="{{
+     request.form.email }}"> <br><br>
+
+
+   <input class="btn btn-default" type="submit" value="Register">
+   </form>
+ -->
+
+    <form method="post" action="/register/" style="color:white;font-family: 'Caveat', cursive;font-size:20px" class="form" role="form">
+
+      <dl>
+        {{ render_field(form.username, class="form-control", placeholder='Enter Username', ) }}
+        {{ render_field(form.email, class="form-control", placeholder='Enter Email') }}
+        {{ render_field(form.password, class="form-control", placeholder='Password') }}
+        {{ render_field(form.confirm, class="form-control", placeholder='Confirm Password') }}
+      </dl>
+
+      <p><input class="btn btn-success btn-block" type=submit value=Register>
+    </form>
+    {% if error %}
+    <p class="error" style="color:red"><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
+</div>
+
+</body>
+{% endblock %}

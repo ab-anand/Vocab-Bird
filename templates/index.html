@@ -1,12 +1,12 @@
 {% extends "homepage.html" %} {% block body %}
 
 <!-- Form -->
-<form action="{{ url_for('welcome')}}" id="content" method="GET">
+<form action="{{ url_for('index')}}" id="content" method="GET">
   <div class="form-group" style="margin-top:40px">
     <label for="search" style="color:white; font-family: 'Caveat', cursive;font-size:40px">What are you looking for?</label>
     <input type="text" class="form-control" placeholder="Search" name="query" value="{{ word }}">
   </div>
-  <button type="submit" class="btn btn-success">Submit</button>
+  <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Search</button>
 </form>
 <!-- form ends -->
 

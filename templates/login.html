@@ -1,0 +1,26 @@
+{% extends "homepage.html" %} {% block body %}
+
+<body>
+
+  <div class="container">
+    <h3 style="color:white;font-family: 'Caveat', cursive;font-size:40px">Please login:</h3>
+    <br>
+    <form action="" class="form-inline" method="post" style="font-family: 'Caveat', cursive;font-size:30px">
+      <input type="text" class="form-control" placeholder="Username" name="username" value="{{
+       request.form.username }}">
+      <input type="password" class="form-control" placeholder="Password" name="password" value="{{
+       request.form.password }}">
+      <input class="btn btn-success" type="submit" value="Login">
+    </form>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
+      <br>
+      <h3 for="register" style="color:white;font-family: 'Caveat', cursive;font-size:25px">No account? <a href='/register'>Register here</a>.</h3>
+      <br>
+
+  </div>
+
+</body>
+
+{% endblock %}

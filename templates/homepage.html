@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -16,7 +17,7 @@
 
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="shortcut icon" href="{{ url_for('static', filename='alphabet.ico') }}">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='bird.ico') }}">
   {% endblock %}
 </head>
 
@@ -46,10 +47,10 @@
     </div>
 </nav>
    </header>
-   <body class="body" style="background:#29313a">
+   <body class="body" style="background:#29313a;">
 
       <div class="border-row" style="width: 100%; margin-bottom: 15px"></div>
-      <div class="container-fluid" style="min-height: 100%;">
+      <div class="container-fluid" style="min-height: 100%; max-width:90%">
          {% block body %}
          		{% with messages = get_flashed_messages() %}
 				  {% if messages %}
@@ -78,7 +79,7 @@
           <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
         </div>
       <!-- footer ends -->
-         
+
 </body>
 <script>
 $(document).ready(function(){
