@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template
+from flask import (Flask, request, render_template,
+                   session, flash, redirect, url_for)
 from vocabx import details
 from forms import RegistrationForm
 from functools import wraps
@@ -7,15 +8,18 @@ from MySQLdb import escape_string as thwart
 from passlib.hash import sha256_crypt
 import gc
 from flask_bootstrap import Bootstrap
+from dbconnect import connection
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = "iamBoring"
 Bootstrap(app)
 # @app.route('/?query=<string:word>', methods=['GET', 'POST'])
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 @app.route('/index/')
 def index(word=None):
+    #flash('Hey There!')
     word = request.args.get('query')
     if word == None:
         word = 'welcome'
@@ -33,9 +37,37 @@ def method_not_found(e):
     return render_template('405.html')
 
 
-@app.route('/login/', methods=['GET','POST'])
+@app.route('/login/', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    try:
+        c, conn = connection()
+
+        error = None
+        if request.method == 'POST':
+
+            data = c.execute("SELECT * FROM users WHERE username = '%s'"%
+                             thwart(request.form['username']))
+            data = c.fetchone()[2]
+
+            if sha256_crypt.verify(request.form['password'], data):
+                session['logged_in'] = True
+                session['username'] = request.form['username']
+                flash('You are now logged in as '+ str(session['username']))
+                return redirect(url_for('index'))
+
+            else:
+                error = 'Invalid credentials. Try again'
+        gc.collect()
+        return render_template('login.html', error=error)
+    except Exception as e:
+        error = 'Invalid credentials. Try again'
+        return render_template('login.html', error=error)
+
+
+@app.route('/check/')
+def check():
+    c, conn = connection()
+    return 'okay'
 
 
 @app.route('/register/', methods=['GET', 'POST'])
@@ -51,7 +83,7 @@ def register():
             password = sha256_crypt.encrypt((str(form.password.data)))
             c, conn = connection()
 
-            x = c.execute("SELECT * FROM users WHERE username = (%s)",
+            x = c.execute("SELECT * FROM users WHERE username = '%s'" %
                           (thwart(username)))
 
             if int(x) > 0:
@@ -59,10 +91,10 @@ def register():
                 return render_template('register.html', form=form)
 
             else:
-                c.execute("INSERT INTO users (username, password, email, tracking) VALUES (%s, %s, %s, %s)",
-                          (thwart(username), thwart(password), thwart(email), thwart("/introduction-to-python-programming/")))
+                c.execute("INSERT INTO users (username, password, email) VALUES (%s, %s, %s)",
+                          (thwart(username), thwart(password), thwart(email)))
                 conn.commit()
-                flash('Thanks for registering')
+                flash('Congrats! You\'ve been registered successfully!')
                 c.close()
                 conn.close()
                 gc.collect()
