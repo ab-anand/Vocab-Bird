@@ -10,6 +10,33 @@
 </form>
 <!-- form ends -->
 
+<!-- add to library -->
+<div class="container">
+<div class="row">
+  <div class="col-sm-6" style="color:white;font-family: 'Ubuntu Condensed', sans-serif;font-size:25px; margin-left:-50px">
+    <p><span class="glyphicon glyphicon-pencil"></span> &nbsp;Searched word:<strong> {{ word }} &nbsp;&nbsp;</strong>
+    {% if session.logged_in %}
+    <a href="#" data-toggle="tooltip" title="Add to library" style="color:#FF1A00;"><span class="glyphicon glyphicon-plus-sign"></span></a>
+    {% else %}
+    <a href="/login/" data-toggle="tooltip" title="Add to library" style="color:#FF1A00;"><span class="glyphicon glyphicon-plus-sign"></span></a>
+    {% endif %}
+  </p>
+  </div>
+  <!--
+  {% if session.logged_in %}
+  <div class="col-sm-6" style="color:white;font-family: 'Caveat', cursive;font-size:20px">
+    <p><a href="#" data-toggle="tooltip" title="Add to library" style="color:white"><span class="glyphicon glyphicon-plus-sign"></span></a></p>
+  </div>
+  {% else %}
+  <div class="col-sm-6" style="color:white;font-family: 'Caveat', cursive;font-size:20px">
+    <p><a href="/login/" data-toggle="tooltip" title="Add to library" style="color:white"><span class="glyphicon glyphicon-plus-sign"></span></a></p>
+  </div>
+  {% endif %}
+-->
+</div>
+</div>
+
+
 <div role="tabpanel" style="margin-top:20px">
 
   <!-- Nav tabs -->

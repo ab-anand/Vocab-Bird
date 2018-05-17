@@ -16,10 +16,22 @@ Bootstrap(app)
 # @app.route('/?query=<string:word>', methods=['GET', 'POST'])
 
 
+# login required decorator
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('You need to login first.')
+            return redirect(url_for('login'))
+    return wrap
+
+
 @app.route('/')
 @app.route('/index/')
 def index(word=None):
-    #flash('Hey There!')
+    #flash('Hey There!', "success")
     word = request.args.get('query')
     if word == None:
         word = 'welcome'
@@ -52,7 +64,7 @@ def login():
             if sha256_crypt.verify(request.form['password'], data):
                 session['logged_in'] = True
                 session['username'] = request.form['username']
-                flash('You are now logged in as '+ str(session['username']))
+                flash('You are now logged in as '+ str(session['username']), 'success')
                 return redirect(url_for('index'))
 
             else:
@@ -87,14 +99,14 @@ def register():
                           (thwart(username)))
 
             if int(x) > 0:
-                flash("That username is already taken, please choose another")
+                flash("That username is already taken, please choose another", 'warning')
                 return render_template('register.html', form=form)
 
             else:
                 c.execute("INSERT INTO users (username, password, email) VALUES (%s, %s, %s)",
                           (thwart(username), thwart(password), thwart(email)))
                 conn.commit()
-                flash('Congrats! You\'ve been registered successfully!')
+                flash('Congrats! You\'ve been registered successfully!', 'success')
                 c.close()
                 conn.close()
                 gc.collect()
@@ -108,5 +120,14 @@ def register():
         return(str(e))
 
 
+@login_required
+@app.route('/logout/')
+def logout():
+	session.pop('logged_in', None)
+	session.clear()
+	flash('You have been logged out.', 'success')
+	gc.collect()
+	return redirect(url_for('index'))
+
 if __name__ == '__main__':
-    app.run(debug=True, port=7000)
+    app.run(debug=True, port=8000)
