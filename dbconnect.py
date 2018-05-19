@@ -9,3 +9,10 @@ def connection():
     c = conn.cursor()
 
     return c, conn
+
+# c, conn = connection()
+#
+# c.execute("ALTER TABLE words MODIFY w_id INT(11) AUTO_INCREMENT")
+# conn.commit()
+# c.close()
+# conn.close()

@@ -7,6 +7,7 @@ import MySQLdb
 from MySQLdb import escape_string as thwart
 from passlib.hash import sha256_crypt
 import gc
+import datetime
 from flask_bootstrap import Bootstrap
 from dbconnect import connection
 
@@ -57,14 +58,15 @@ def login():
         error = None
         if request.method == 'POST':
 
-            data = c.execute("SELECT * FROM users WHERE username = '%s'"%
+            data = c.execute("SELECT * FROM users WHERE username = '%s'" %
                              thwart(request.form['username']))
             data = c.fetchone()[2]
 
             if sha256_crypt.verify(request.form['password'], data):
                 session['logged_in'] = True
                 session['username'] = request.form['username']
-                flash('You are now logged in as '+ str(session['username']), 'success')
+                flash('You are now logged in as ' +
+                      str(session['username']), 'success')
                 return redirect(url_for('index'))
 
             else:
@@ -123,11 +125,35 @@ def register():
 @login_required
 @app.route('/logout/')
 def logout():
-	session.pop('logged_in', None)
-	session.clear()
-	flash('You have been logged out.', 'success')
-	gc.collect()
-	return redirect(url_for('index'))
+    session.pop('logged_in', None)
+    session.clear()
+    flash('You have been logged out.', 'success')
+    gc.collect()
+    return redirect(url_for('index'))
+
+
+@login_required
+@app.route('/add_to_library/')
+def add_to_library():
+    c, conn = connection()
+    word = request.args.get('word')
+    now = datetime.datetime.now()
+    print word
+    word_exists = c.execute("SELECT * FROM words WHERE (content = '%s' AND username = '%s')" %
+                            (word, thwart(session['username'])))
+
+    if int(word_exists) > 0:
+        flash('"{}" already exists in your library!'.format(word), 'warning')
+    else:
+        c.execute("INSERT INTO words (content, username, timestamp) VALUES (%s, %s, %s)",
+                  (thwart(word), thwart(session['username']), now))
+        conn.commit()
+        flash('Yayee! "{}" has been added to your library.'.format(word), 'success')
+        c.close()
+        conn.close()
+        gc.collect()
+    return redirect(url_for('index', query=word))
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

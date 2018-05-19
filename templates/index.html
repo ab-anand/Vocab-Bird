@@ -16,7 +16,7 @@
   <div class="col-sm-6" style="color:white;font-family: 'Ubuntu Condensed', sans-serif;font-size:25px; margin-left:-50px">
     <p><span class="glyphicon glyphicon-pencil"></span> &nbsp;Searched word:<strong> {{ word }} &nbsp;&nbsp;</strong>
     {% if session.logged_in %}
-    <a href="#" data-toggle="tooltip" title="Add to library" style="color:#FF1A00;"><span class="glyphicon glyphicon-plus-sign"></span></a>
+    <a href="{{ url_for('add_to_library', word=word)}}" name="word" data-toggle="tooltip" title="Add to library" style="color:#FF1A00;"><span class="glyphicon glyphicon-plus-sign"></span></a>
     {% else %}
     <a href="/login/" data-toggle="tooltip" title="Add to library" style="color:#FF1A00;"><span class="glyphicon glyphicon-plus-sign"></span></a>
     {% endif %}
