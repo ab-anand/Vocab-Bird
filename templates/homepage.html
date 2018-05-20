@@ -8,6 +8,7 @@
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed|Caveat" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
@@ -36,11 +37,11 @@
               {% if session.logged_in %}
 
                 <div class="dropdown">
-                  <a href="https://github.com/ab-anand/Vocab-Bird" style="color:black !important;"target="_blank"> <span class="social social-github"></span> View on GitHub &nbsp;  </a>
+                  <a href="https://github.com/ab-anand/Vocab-Bird" style="color:black !important;"target="_blank"> <i class="fa fa-github" style="font-size:20px"></i>&nbsp;View on GitHub </a>
                   <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown">
                   <span class="glyphicon glyphicon-user"><span class="caret"></span></button>
                   <ul class="dropdown-menu">
-                    <li class="dropdown-header">Signed in as {{ session.username }}</li>
+                    <li class="dropdown-header">Signed in as <strong>{{ session.username }}</strong></li>
                     <li class="divider"></li>
                     <li><a href="{{ url_for('profile_page', username=session.username) }}">My Profile</a></li>
                     <li><a href="/logout/">Logout</a></li>

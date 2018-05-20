@@ -165,6 +165,21 @@ def profile_page(username):
     # print words, type(words)
     return render_template('profilepage.html', username=username, data=data)
 
+@login_required
+@app.route('/remove_word/<word>')
+def remove_word(word):
+    # print word
+    # print session['username']
+    c, conn = connection()
+    c.execute("DELETE FROM words WHERE (username = '%s' AND content = '%s')"%
+                        (thwart(session['username']), word))
+    conn.commit()
+    flash('"{}" has been removed from your library!'.format(word), 'success')
+    c.close()
+    conn.close()
+    gc.collect()
+    return redirect(url_for('profile_page', username=session['username']))
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

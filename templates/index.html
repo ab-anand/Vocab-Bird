@@ -18,7 +18,7 @@
     {% if session.logged_in %}
     <a href="{{ url_for('add_to_library', word=word)}}" name="word" data-toggle="tooltip" title="Add to library" style="color:#FF1A00;"><span class="glyphicon glyphicon-plus-sign"></span></a>
     {% else %}
-    <a href="/login/" data-toggle="tooltip" title="Add to library" style="color:#FF1A00;"><span class="glyphicon glyphicon-plus-sign"></span></a>
+    <a class="plus" href="/login/" data-toggle="tooltip" title="Add to library" style="color:#FF1A00;"><span class="glyphicon glyphicon-plus-sign"></span></a>
     {% endif %}
   </p>
   </div>
@@ -61,7 +61,7 @@
     <div role="tabpanel" class="tab-pane fade" id="usage"><i>Ex ~ {{ values['usage'] }}</i></div>
 
   </div>
-
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </div>
 
 

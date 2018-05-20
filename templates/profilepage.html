@@ -35,7 +35,7 @@ Tip: Click the trash icon to remove a word from your library
 <div class="container" style="color:white ">
   <h2 style="color:white;font-family: 'Caveat', cursive;font-size:40px">Hello, {{ username }}! </h2>
 <p style="color:white; font-family: 'Ubuntu Condensed', sans-serif;font-size:20px;">Welcome to the library. Here you can check all your contents.<br>
-Tip: Click the trash icon to remove a word from your library
+Tip: You can search for a word in your library from the searchbar below.
 </p>
 <br>
 
@@ -58,13 +58,13 @@ Tip: Click the trash icon to remove a word from your library
         <td><span class="glyphicon glyphicon-console" class="media-object"></span></td>
         <td><a href="{{ url_for('index', query=item[0])}}">{{ item[0] }}</a></td>
         <td>{{ item[1] }}</td>
-        <td><a href="#"<span class="glyphicon glyphicon-trash" class="media-object"></span></td>
+        <td><a href="{{ url_for('remove_word', word=item[0]) }}" data-toggle="tooltip" title="remove" style="color:#2EFE00 !important"><span class="glyphicon glyphicon-trash" class="media-object"></span></a></td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
 
-  <p style="color:white; font-family: 'Ubuntu Condensed', sans-serif;font-size:20px;">Note that you can search for a word in your library from the searchbar above.</p>
+  <p style="color:white; font-family: 'Ubuntu Condensed', sans-serif;font-size:20px;">Note that you can remove a word from your library by clicking the trash icon on the right.</p>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
 </div>
 
