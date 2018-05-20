@@ -155,5 +155,16 @@ def add_to_library():
     return redirect(url_for('index', query=word))
 
 
+@login_required
+@app.route('/profile/<username>')
+def profile_page(username):
+    c, conn = connection()
+    c.execute("SELECT content, timestamp FROM words WHERE username = '%s' ORDER BY timestamp DESC" %
+                            (thwart(session['username'])))
+    data = c.fetchall()
+    # print words, type(words)
+    return render_template('profilepage.html', username=username, data=data)
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

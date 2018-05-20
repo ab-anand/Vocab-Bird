@@ -36,13 +36,13 @@
               {% if session.logged_in %}
 
                 <div class="dropdown">
-                  <a href="https://github.com/ab-anand/Vocab-Bird" target="_blank"> <span class="social social-github"></span> View on GitHub &nbsp;&nbsp;&nbsp;  </a>
+                  <a href="https://github.com/ab-anand/Vocab-Bird" style="color:black !important;"target="_blank"> <span class="social social-github"></span> View on GitHub &nbsp;  </a>
                   <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown">
                   <span class="glyphicon glyphicon-user"><span class="caret"></span></button>
                   <ul class="dropdown-menu">
                     <li class="dropdown-header">Signed in as {{ session.username }}</li>
                     <li class="divider"></li>
-                    <li><a href="/profile/">My Profile</a></li>
+                    <li><a href="{{ url_for('profile_page', username=session.username) }}">My Profile</a></li>
                     <li><a href="/logout/">Logout</a></li>
                   </ul>
                 </div>

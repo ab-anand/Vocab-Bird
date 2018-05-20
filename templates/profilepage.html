@@ -1,0 +1,84 @@
+{% extends "homepage.html" %}
+
+
+{% block body %}
+<body>
+<!--
+<div class="container">
+  <h2 style="color:white;font-family: 'Caveat', cursive;font-size:40px">Hello, {{ username }}! </h2>
+<p style="color:white; font-family: 'Ubuntu Condensed', sans-serif;font-size:20px;">Welcome to the library. Here you can check all your contents.<br>
+Tip: Click the trash icon to remove a word from your library
+</p>
+<br>
+
+
+<div class="media" style="color:white">
+  <div class="media-left" >
+    <span class="glyphicon glyphicon-console" class="media-object" style="width:60px"></span>
+
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading"><a>Left-aligned</a></h4>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  </div>
+</div>
+<hr>
+
+
+
+
+
+</div>
+-->
+
+
+<div class="container" style="color:white ">
+  <h2 style="color:white;font-family: 'Caveat', cursive;font-size:40px">Hello, {{ username }}! </h2>
+<p style="color:white; font-family: 'Ubuntu Condensed', sans-serif;font-size:20px;">Welcome to the library. Here you can check all your contents.<br>
+Tip: Click the trash icon to remove a word from your library
+</p>
+<br>
+
+<!-- Search bar -->
+  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Words</th>
+        <th> Date added </th>
+        <th> &nbsp;</th>
+      </tr>
+
+    </thead>
+    <tbody id="myTable">
+      {% for item in data %}
+      <tr>
+        <td><span class="glyphicon glyphicon-console" class="media-object"></span></td>
+        <td><a href="{{ url_for('index', query=item[0])}}">{{ item[0] }}</a></td>
+        <td>{{ item[1] }}</td>
+        <td><a href="#"<span class="glyphicon glyphicon-trash" class="media-object"></span></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <p style="color:white; font-family: 'Ubuntu Condensed', sans-serif;font-size:20px;">Note that you can search for a word in your library from the searchbar above.</p>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+
+</body>
+{% endblock %}
