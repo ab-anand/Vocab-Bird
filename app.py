@@ -138,7 +138,7 @@ def add_to_library():
     c, conn = connection()
     word = request.args.get('word')
     now = datetime.datetime.now()
-    print word
+    # print word
     word_exists = c.execute("SELECT * FROM words WHERE (content = '%s' AND username = '%s')" %
                             (word, thwart(session['username'])))
 
