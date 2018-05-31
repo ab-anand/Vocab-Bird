@@ -2,3 +2,8 @@
 
 ![website gif](vocab.gif)
 
+## Features present:
+- Find meaning(`multiple`), synonym, antonym, usage examples
+- Add it to your library for further use
+- Removing word from library
+
